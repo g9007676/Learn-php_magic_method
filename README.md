@@ -49,6 +49,7 @@ class MyClass
                 echo "Calling static method '$name' "
                         . implode(', ', $arguments). "\n";
         }
+}
 
 $myclass = new MyClass();
 $myclass->email = '123'; //調用 __set

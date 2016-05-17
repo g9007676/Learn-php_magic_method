@@ -11,7 +11,19 @@ class MyClass2
 
 	function __toString()
 	{
-		return $this->foo;
+		return $this->foo . "\n";
+	}
+
+	//調用對象時執行, $myclass(213);
+	//可用is_callable 來判斷 invoke fun 是否存在
+	function __invoke($x) {
+		echo "do invoke $x";
+		$this->do_a();
+	}
+
+	function do_a()
+	{
+		$this->name = "張三";
 	}
 }
 
@@ -21,4 +33,10 @@ var_dump($myclass);
 
 //可通過 echo / printf 出書 toString
 //printf 只接受字串型態
-printf("class to string :%s, %d", $myclass);
+printf("class to string :%s\n", $myclass);
+
+
+//調用fun 方式來調用類別就會執行 __invoke
+$myclass(123);
+var_dump($myclass);
+var_dump(is_callable($myclass));

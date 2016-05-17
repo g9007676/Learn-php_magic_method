@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 class MyClass
 {
 
+	public $name;
 	private $data = array();
 
 	//寫入屬性時，自動跳用此函式
@@ -47,6 +48,22 @@ class MyClass
 		echo "Calling static method '$name' "
 			. implode(', ', $arguments). "\n";
 	}
+
+	//序列化時如果存在 __sleep，自動調用
+	//序列化資料時，可以保存屬性
+	//必須回傳陣列資料
+	//不可帶入值
+	function __sleep()
+	{
+		return array('data', 'name');
+	}
+
+	//反序列化後執行
+	function __wakeup()
+	{
+		$this->name = 'aa';
+	}
+
 }
 
 $myclass = new MyClass();
@@ -66,3 +83,11 @@ $myclass->email = null;// 調用 __get
 $myclass->runTest('in object context');
 
 $myclass::runTest('in static object context');
+
+$myclass->name = "3212321";
+var_dump($myclass);
+
+$serialize_class = serialize($myclass);// 屬性 name 序列化前保存在資料裡
+var_dump($serialize_class);
+$class = unserialize($serialize_class);
+var_dump($class);

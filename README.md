@@ -1,7 +1,12 @@
 # php_magic_method
-學習魔術方法
+
+## 學習 php 魔術方法
 
 
+
+
+
+-------------------------------
 ```php
 class MyClass
 {

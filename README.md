@@ -65,6 +65,7 @@ $myclass->email = null;// 調用 __get
 * __call __callStatic
 -------------------------------
 ```php
+// __call __callStatic 呼叫方法不存在時執行
 class MyClass
 {
     //實體化呼叫
